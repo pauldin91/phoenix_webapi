@@ -18,8 +18,7 @@ defmodule HelloWeb.Router do
     pipe_through(:browser)
 
     get("/", PageController, :home)
-    resources("/users", UserController)
-    resources("/posts", PostController, only: [:index, :show])
+    get("/topics/new", TopicsController, :new)
   end
 
   # Other scopes may use custom stacks.
