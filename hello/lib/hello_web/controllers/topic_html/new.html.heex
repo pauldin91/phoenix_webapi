@@ -1,6 +1,6 @@
-<%= form_for @changeset, topic_path(@conn, :create), fn f -> %>
-    <div class="form-group">
-        <%= text_input f, :title, placeholder: "Title", class: "form-control" %>
-    </div>
-    <%= submit "Save Topic", class: "btn btn-primary" %>
-<% end %>
+<.simple_form :let={f} for={@changeset} method={"post"}  action={~p"/topics/new"}>
+  <.input field={f[:title]} type="text" label="Title" />
+  <:actions>
+    <.button>Save Topic</.button>
+  </:actions>
+</.simple_form>

@@ -3,7 +3,7 @@ defmodule HelloWeb.TopicController do
   alias Hello.Topics.Topic
 
   def new(conn, params) do
-    changset = Topic.changeset(%Topic{}, %{})
+    changeset = Topic.changeset(%Topic{}, %{})
     render(conn, :new, changeset: changeset)
   end
 end
