@@ -6,4 +6,7 @@ defmodule HelloWeb.TopicController do
     changeset = Topic.changeset(%Topic{}, %{})
     render(conn, :new, changeset: changeset)
   end
+
+  def create(conn, %{"topic" => topic}) do
+  end
 end
