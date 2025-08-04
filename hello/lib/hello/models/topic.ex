@@ -15,6 +15,6 @@ defmodule Hello.Topics.Topic do
   end
 
   def list_topics do
-    Repo.all(Topic)
+    Repo.all(Hello.Topics.Topic)
   end
 end
