@@ -19,6 +19,7 @@ defmodule HelloWeb.Router do
 
     get("/", PageController, :home)
     get("/topics/new", TopicController, :new)
+    get("/topics", TopicController, :index)
     post("/topics", TopicController, :create)
   end
 

@@ -1,4 +1,4 @@
-<.simple_form :let={f} for={@changeset} method={"post"}  action={Routes.topic_path(@conn,:create)}>
+<.simple_form :let={f} for={@changeset} method={"post"}  action={~p"/topics"}>
   <.input field={f[:title]} type="text" label="Title" />
   <:actions>
     <.button>Save Topic</.button>
