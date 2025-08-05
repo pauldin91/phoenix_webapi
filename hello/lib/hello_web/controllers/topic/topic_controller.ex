@@ -9,7 +9,7 @@ defmodule HelloWeb.TopicController do
   end
 
   def index(conn, _params) do
-    topics = Topic.list_topics()
+    topics = Repo.all(Topic)
     render(conn, :index, topics: topics)
   end
 
@@ -18,10 +18,12 @@ defmodule HelloWeb.TopicController do
 
     case Repo.insert(changeset) do
       {:ok, _post} ->
-        render(conn, :topics)
+        conn
+        |> put_flash(:info,"Topic Created")
+        |> redirect(to: ~p"/topics")
 
       {:error, changeset} ->
-        render(conn, :new, changeset)
+        render(conn, :new,changeset: changeset)
     end
   end
 end

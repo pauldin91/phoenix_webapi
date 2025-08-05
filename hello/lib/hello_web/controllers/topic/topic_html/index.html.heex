@@ -1,7 +1,14 @@
 <.list>
 <:item title="Topics">
   <ul>
-    <li :for={topic <- @topics}>Title: {topic.title}</li>
+    <li :for={topic <- @topics}>Id: {topic.id}, Title: {topic.title}</li>
   </ul>
 </:item>
 </.list>
+
+
+<div class="fixed-action-btn">
+  <.link navigate={~p"/topics/new"} class="btn-floating btn-large waves-effect waves-light red">
+    <i class="material-icons">add</i>
+  </.link>
+</div>

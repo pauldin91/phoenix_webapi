@@ -13,8 +13,4 @@ defmodule Hello.Topics.Topic do
     |> cast(params, [:title])
     |> validate_required([:title])
   end
-
-  def list_topics do
-    Repo.all(Hello.Topics.Topic)
-  end
 end

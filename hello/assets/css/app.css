@@ -2,8 +2,4 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-.help-block {
-    color: red;
-}
-
 /* This file is for your main application CSS */
