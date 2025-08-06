@@ -20,6 +20,13 @@ defmodule HelloWeb.Router do
     resources("/topics", TopicController)
   end
 
+  scope "/auth", MyAppWeb do
+    pipe_through(:browser)
+
+    get("/:provider", AuthController, :request)
+    get("/:provider/callback", AuthController, :callback)
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", HelloWeb do
   #   pipe_through :api
