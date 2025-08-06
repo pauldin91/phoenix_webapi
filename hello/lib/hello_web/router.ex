@@ -17,10 +17,14 @@ defmodule HelloWeb.Router do
   scope "/", HelloWeb do
     pipe_through(:browser)
     get("/", PageController, :home)
-    resources("/topics", TopicController)
   end
 
-  scope "/auth", MyAppWeb do
+  scope "/topics", HelloWeb do
+    pipe_through(:browser)
+    resources("/", TopicController)
+  end
+
+  scope "/auth", HelloWeb do
     pipe_through(:browser)
 
     get("/:provider", AuthController, :request)
