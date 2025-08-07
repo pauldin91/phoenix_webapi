@@ -3,6 +3,8 @@ defmodule HelloWeb.TopicController do
   alias Hello.Topics.Topic
   alias Hello.Repo
 
+  plug(Hello.Plugs.RequireAuth when action not in [:index])
+
   def new(conn, params) do
     changeset = Topic.changeset(%Topic{}, %{})
     render(conn, :new, changeset: changeset)
