@@ -1,10 +1,12 @@
 defmodule Hello.User do
-  use Hello.Web, :model
+  use Ecto.Schema
+  import Ecto.Changeset
+  import Ecto.Query, warn: false
 
   schema "users" do
-    add(:email, :string)
-    add(:provider, :string)
-    add(:token, :string)
+    field(:email, :string)
+    field(:provider, :string)
+    field(:token, :string)
     timestamps()
   end
 
