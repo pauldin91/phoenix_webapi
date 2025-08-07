@@ -30,8 +30,14 @@ defmodule HelloWeb.AuthController do
       {:error, _reason} ->
         conn
         |> put_flash(:error, "Error sigining in")
-        |> redirect(to: ~p"/")
+        |> redirect(to: ~p"/topics")
     end
+  end
+
+  def signout(conn, _params) do
+    conn
+    |> configure_session(drop: true)
+    |> redirect(to: ~p"/")
   end
 
   defp insert_or_update_user(changeset) do

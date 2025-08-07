@@ -8,6 +8,7 @@ defmodule HelloWeb.Router do
     plug(:put_root_layout, html: {HelloWeb.Layouts, :root})
     plug(:protect_from_forgery)
     plug(:put_secure_browser_headers)
+    plug(Hello.Plugs.SetUser)
   end
 
   pipeline :api do
@@ -27,6 +28,7 @@ defmodule HelloWeb.Router do
   scope "/auth", HelloWeb do
     pipe_through(:browser)
 
+    get("/signout", AuthController, :signout)
     get("/:provider", AuthController, :request)
     get("/:provider/callback", AuthController, :callback)
   end
