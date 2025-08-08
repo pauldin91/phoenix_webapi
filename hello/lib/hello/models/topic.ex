@@ -2,10 +2,10 @@ defmodule Hello.Topics.Topic do
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query, warn: false
-  alias Hello.Repo
 
   schema "topics" do
     field(:title, :string)
+    belongs_to :user, Hello.User
   end
 
   def changeset(struct, params \\ %{}) do
