@@ -4,7 +4,7 @@ defmodule Hello.User do
 
   import Ecto.Query, warn: false
 
-  alias Hello.Topics.Topic
+  alias Hello.Topic
 
   schema "users" do
     field(:email, :string)

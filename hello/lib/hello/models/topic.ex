@@ -1,4 +1,4 @@
-defmodule Hello.Topics.Topic do
+defmodule Hello.Topic do
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query, warn: false

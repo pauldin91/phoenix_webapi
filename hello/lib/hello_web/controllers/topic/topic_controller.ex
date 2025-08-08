@@ -1,6 +1,6 @@
 defmodule HelloWeb.TopicController do
   use HelloWeb, :controller
-  alias Hello.Topics.Topic
+  alias Hello.Topic
   alias Hello.Repo
 
   plug(Hello.Plugs.RequireAuth when action not in [:index])
@@ -11,7 +11,8 @@ defmodule HelloWeb.TopicController do
   end
 
   def index(conn, _params) do
-    topics = Repo.all(Topic)
+    IO.inspect(conn.assigns.user)
+    topics = Repo.all_by(Topic, user_id: conn.assigns.user.id)
     render(conn, "index.html", topics: topics)
   end
 
