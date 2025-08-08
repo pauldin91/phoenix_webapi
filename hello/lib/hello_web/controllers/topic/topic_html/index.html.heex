@@ -3,19 +3,22 @@
     <ul class="collection">
       <li :for={topic <- @topics} class="collection-item">
         <.link navigate={~p"/topics"}>
-          Id: <%= topic.id %>, Title: <%= topic.title %>
+          Id: {topic.id}, Title: {topic.title}
         </.link>
-          <div class="right">
-             <.link navigate={~p"/topics/#{topic.id}/edit"} > Edit</.link>
-             <.link href={~p"/topics/#{topic.id}"} method="delete" class="btn-flat red-text text-darken-2"> Delete </.link>
-          </div>
+        <div class="right">
+          <.link navigate={~p"/topics/#{topic.id}/edit"}> Edit</.link>
+          <.link
+            href={~p"/topics/#{topic.id}"}
+            method="delete"
+            class="btn-flat red-text text-darken-2"
+          >
+            Delete
+          </.link>
+        </div>
       </li>
     </ul>
   </:item>
 </.list>
-
-
-
 
 <div class="fixed-action-btn">
   <.link navigate={~p"/topics/new"} class="btn-floating btn-large waves-effect waves-light red">
