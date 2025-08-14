@@ -6,6 +6,7 @@ defmodule Hello.Topic do
   schema "topics" do
     field(:title, :string)
     belongs_to :user, Hello.User
+    has_many :comments, Hello.Comment
   end
 
   def changeset(struct, params \\ %{}) do

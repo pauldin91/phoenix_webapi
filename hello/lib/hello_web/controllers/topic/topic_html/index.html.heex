@@ -2,7 +2,7 @@
   <:item title="Topics">
     <ul class="collection">
       <li :for={topic <- @topics} class="collection-item">
-        <.link navigate={~p"/topics"}>
+        <.link navigate={~p"/topics/#{topic.id}"}>
           Id: {topic.id}, Title: {topic.title}
         </.link>
         <%= if @conn.assigns.user.id == topic.user.id do %>
