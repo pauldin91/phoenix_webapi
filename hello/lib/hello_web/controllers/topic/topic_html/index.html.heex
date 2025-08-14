@@ -5,16 +5,18 @@
         <.link navigate={~p"/topics"}>
           Id: {topic.id}, Title: {topic.title}
         </.link>
-        <div class="right">
-          <.link navigate={~p"/topics/#{topic.id}/edit"}> Edit</.link>
-          <.link
-            href={~p"/topics/#{topic.id}"}
-            method="delete"
-            class="btn-flat red-text text-darken-2"
-          >
-            Delete
-          </.link>
-        </div>
+        <%= if @conn.assigns.user.id == topic.user.id do %>
+          <div class="right">
+            <.link navigate={~p"/topics/#{topic.id}/edit"}> Edit</.link>
+            <.link
+              href={~p"/topics/#{topic.id}"}
+              method="delete"
+              class="btn-flat red-text text-darken-2"
+            >
+              Delete
+            </.link>
+          </div>
+        <% end %>
       </li>
     </ul>
   </:item>

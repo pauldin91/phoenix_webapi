@@ -4,15 +4,15 @@ defmodule HelloWeb.TopicController do
   alias Hello.Repo
 
   plug(Hello.Plugs.RequireAuth when action not in [:index])
+  plug :check_post_owner when action in [:update, :edit, :delete]
 
-  def new(conn, params) do
+  def new(conn, _params) do
     changeset = Topic.changeset(%Topic{}, %{})
     render(conn, :new, changeset: changeset)
   end
 
   def index(conn, _params) do
-    IO.inspect(conn.assigns.user)
-    topics = Repo.all_by(Topic, user_id: conn.assigns.user.id)
+    topics = Repo.all_by(Topic, user_id: conn.assigns.user.id) |> Repo.preload(:user)
     render(conn, "index.html", topics: topics)
   end
 
@@ -54,9 +54,8 @@ defmodule HelloWeb.TopicController do
   end
 
   def update(conn, %{"id" => topic_id, "topic" => topic}) do
-    changeset =
-      Repo.get(Topic, topic_id)
-      |> Topic.changeset(topic)
+    old_topic = Repo.get(Topic, topic_id)
+    changeset = Topic.changeset(old_topic, topic)
 
     case Repo.update(changeset) do
       {:ok, _topic} ->
@@ -64,8 +63,22 @@ defmodule HelloWeb.TopicController do
         |> put_flash(:info, "Topic Updated")
         |> redirect(to: ~p"/topics")
 
-      {:error, topic} ->
-        render(conn, :edit, changeset: changeset)
+      {:error, changeset} ->
+        render(conn, "edit.html", changeset: changeset, topic: old_topic)
+    end
+  end
+
+  def check_post_owner(conn, _params) do
+    %{params: %{"id" => topic_id}} = conn
+
+    if Repo.get(Topic, topic_id) ==
+         conn.assigns.user.id do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You dont own it")
+      |> redirect(to: ~p"/topics")
+      |> halt()
     end
   end
 end
