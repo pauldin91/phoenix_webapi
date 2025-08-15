@@ -13,7 +13,6 @@ defmodule HelloWeb.TopicController do
 
   def index(conn, _params) do
     topics = Repo.all_by(Topic, user_id: conn.assigns.user.id) |> Repo.preload(:user)
-    # topics = Repo.all(Topic)
     render(conn, "index.html", topics: topics)
   end
 

@@ -25,6 +25,7 @@ defmodule HelloWeb.UserSocket do
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
   @impl true
+  @spec connect(map(), Phoenix.Socket.t(), any()) :: {:ok, Phoenix.Socket.t()}
   def connect(%{"token" => token}, socket, _connect_info) do
     # case Phoenix.Token.verify(socket, "key", token) do
     #   {:ok, user_id} ->
