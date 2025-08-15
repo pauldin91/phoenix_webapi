@@ -2,6 +2,7 @@ defmodule HelloWeb.CommentsChannel do
   use HelloWeb, :channel
 
   alias Hello.Repo
+  alias Hello.Topic
   alias Hello.Comment
 
   @impl true
@@ -17,14 +18,18 @@ defmodule HelloWeb.CommentsChannel do
   end
 
   @impl true
-  def handle_in(name, payload, socket) do
+  @spec handle_in(any(), any(), any()) :: {:reply, :ok | {:error, %{errors: map()}}, any()}
+  def handle_in(name, %{"content" => content}, socket) do
     topic = socket.assigns.topic
     user_id = socket.assigns.user_id
+    IO.inspect(content)
 
     changeset =
       topic
       |> Ecto.build_assoc(:comments, user_id: user_id)
-      |> Comment.changeset(%{content: payload})
+      |> Comment.changeset(%{content: content})
+
+    IO.inspect(changeset)
 
     case Repo.insert(changeset) do
       {:ok, comment} ->

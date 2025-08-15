@@ -13,11 +13,13 @@ defmodule HelloWeb.TopicController do
 
   def index(conn, _params) do
     topics = Repo.all_by(Topic, user_id: conn.assigns.user.id) |> Repo.preload(:user)
+    # topics = Repo.all(Topic)
     render(conn, "index.html", topics: topics)
   end
 
   def show(conn, %{"id" => topic_id}) do
     topic = Repo.get!(Topic, topic_id)
+
     render(conn, :show, topic: topic)
   end
 
@@ -27,7 +29,7 @@ defmodule HelloWeb.TopicController do
 
     conn
     |> put_flash(:info, "Topic deleted")
-    |> redirect(to: ~p"/topics")
+    |> redirect(to: ~p"/")
   end
 
   def edit(conn, %{"id" => topic_id}) do
@@ -46,7 +48,7 @@ defmodule HelloWeb.TopicController do
       {:ok, _post} ->
         conn
         |> put_flash(:info, "Topic Created")
-        |> redirect(to: ~p"/topics")
+        |> redirect(to: ~p"/")
 
       {:error, changeset} ->
         render(conn, :new, changeset: changeset)
@@ -61,7 +63,7 @@ defmodule HelloWeb.TopicController do
       {:ok, _topic} ->
         conn
         |> put_flash(:info, "Topic Updated")
-        |> redirect(to: ~p"/topics")
+        |> redirect(to: ~p"/")
 
       {:error, changeset} ->
         render(conn, "edit.html", changeset: changeset, topic: old_topic)
@@ -77,7 +79,7 @@ defmodule HelloWeb.TopicController do
     else
       conn
       |> put_flash(:error, "You dont own it")
-      |> redirect(to: ~p"/topics")
+      |> redirect(to: ~p"/")
       |> halt()
     end
   end
