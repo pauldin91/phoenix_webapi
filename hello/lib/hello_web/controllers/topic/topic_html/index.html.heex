@@ -2,17 +2,13 @@
   <:item title="Topics">
     <ul class="collection">
       <li :for={topic <- @topics} class="collection-item">
-        <.link navigate={~p"/topics/#{topic.id}"}>
+        <.link navigate={~p"/#{topic.id}"}>
           Id: {topic.id}, Title: {topic.title}
         </.link>
         <%= if @conn.assigns.user.id == topic.user.id do %>
           <div class="right">
-            <.link navigate={~p"/topics/#{topic.id}/edit"}> Edit</.link>
-            <.link
-              href={~p"/topics/#{topic.id}"}
-              method="delete"
-              class="btn-flat red-text text-darken-2"
-            >
+            <.link navigate={~p"/#{topic.id}/edit"}> Edit</.link>
+            <.link href={~p"/#{topic.id}"} method="delete" class="btn-flat red-text text-darken-2">
               Delete
             </.link>
           </div>
@@ -23,7 +19,7 @@
 </.list>
 
 <div class="fixed-action-btn">
-  <.link navigate={~p"/topics/new"} class="btn-floating btn-large waves-effect waves-light red">
+  <.link navigate={~p"/new"} class="btn-floating btn-large waves-effect waves-light red">
     <i class="material-icons">add</i>
   </.link>
 </div>

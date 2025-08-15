@@ -1,4 +1,4 @@
-defmodule Discuss.Comment do
+defmodule Hello.Comment do
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query, warn: false

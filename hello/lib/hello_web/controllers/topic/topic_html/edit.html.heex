@@ -1,4 +1,4 @@
-<.simple_form :let={f} for={@changeset} method={"put"}  action={~p"/topics/#{@topic.id}"}>
+<.simple_form :let={f} for={@changeset} method="put" action={~p"/#{@topic.id}"}>
   <.input field={f[:title]} type="text" label="Title" />
   <:actions>
     <.button>Save Topic</.button>

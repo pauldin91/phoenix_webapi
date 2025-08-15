@@ -17,11 +17,6 @@ defmodule HelloWeb.Router do
 
   scope "/", HelloWeb do
     pipe_through(:browser)
-    get("/", PageController, :home)
-  end
-
-  scope "/topics", HelloWeb do
-    pipe_through(:browser)
     resources("/", TopicController)
   end
 
