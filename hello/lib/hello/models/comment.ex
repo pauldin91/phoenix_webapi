@@ -3,6 +3,8 @@ defmodule Hello.Comment do
   import Ecto.Changeset
   import Ecto.Query, warn: false
 
+  @derive {Jason.Encoder, only: [:content]}
+
   schema "comments" do
     field :content, :string
     belongs_to :user, Hello.User
@@ -12,7 +14,7 @@ defmodule Hello.Comment do
 
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:content, :user_id, :topic_id])
-    |> validate_required([:content, :user_id, :topic_id])
+    |> cast(params, [:content])
+    |> validate_required([:content])
   end
 end

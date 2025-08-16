@@ -18,11 +18,10 @@ const createSocket = (topicId) => {
 
   channel.on(`comments:${topicId}:new`, renderComment);
 
-  document.querySelector('button').addEventListener('click', () => {
-    const content = document.querySelector('textarea').value;
-
-    channel.push('comment:add', { content: content });
-  });
+document.querySelector('#add-comment').addEventListener('click', () => {
+  const content = document.querySelector('textarea').value;
+  channel.push('comments:add', { content: content });
+});
 };
 
 function renderComments(comments) {

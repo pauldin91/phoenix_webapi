@@ -27,13 +27,13 @@ defmodule HelloWeb.UserSocket do
   @impl true
   @spec connect(map(), Phoenix.Socket.t(), any()) :: {:ok, Phoenix.Socket.t()}
   def connect(%{"token" => token}, socket, _connect_info) do
-    # case Phoenix.Token.verify(socket, "key", token) do
-    #   {:ok, user_id} ->
-    {:ok, assign(socket, :user_id, 1)}
+    case Phoenix.Token.verify(socket, "key", token) do
+      {:ok, user_id} ->
+        {:ok, assign(socket, :user_id, user_id)}
 
-    #   {:error, _error} ->
-    #     :error
-    # end
+      {:error, _error} ->
+        :error
+    end
   end
 
   # Socket IDs are topics that allow you to identify all sockets for a given user:

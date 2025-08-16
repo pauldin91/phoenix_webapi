@@ -22,15 +22,18 @@ defmodule HelloWeb.AuthController do
   defp signin(conn, changeset) do
     case(insert_or_update_user(changeset)) do
       {:ok, user} ->
+        token = Phoenix.Token.sign(conn, "key", user.id)
+
         conn
         |> put_flash(:info, "Welcome back!")
         |> put_session(:user_id, user.id)
-        |> redirect(to: ~p"/topics")
+        |> assign(:user_token, token)
+        |> redirect(to: ~p"/")
 
       {:error, _reason} ->
         conn
         |> put_flash(:error, "Error sigining in")
-        |> redirect(to: ~p"/topics")
+        |> redirect(to: ~p"/")
     end
   end
 
