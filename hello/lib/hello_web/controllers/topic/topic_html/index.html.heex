@@ -1,15 +1,28 @@
 <.list>
   <:item title="Topics">
-    <ul class="collection">
-      <li :for={topic <- @topics} class="collection-item">
-        <.link navigate={~p"/#{topic.id}"}>
-          Id: {topic.id}, Title: {topic.title}
-        </.link>
+    <ul class="collection z-depth-1">
+      <li :for={topic <- @topics} class="collection-item valign-wrapper">
+        <div class="left">
+          <.link navigate={~p"/#{topic.id}"}>
+            <span class="grey-text text-darken-1"># {topic.id}</span>
+            — <strong>{topic.title}</strong>
+          </.link>
+        </div>
+
         <%= if @conn.assigns.user.id == topic.user.id do %>
           <div class="right">
-            <.link navigate={~p"/#{topic.id}/edit"}> Edit</.link>
-            <.link href={~p"/#{topic.id}"} method="delete" class="btn-flat red-text text-darken-2">
-              Delete
+            <.link
+              navigate={~p"/#{topic.id}/edit"}
+              class="btn-small blue lighten-1 white-text waves-effect waves-light"
+            >
+              <i class="material-icons left">edit</i> Edit
+            </.link>
+            <.link
+              href={~p"/#{topic.id}"}
+              method="delete"
+              class="btn-small red lighten-1 white-text waves-effect waves-light"
+            >
+              <i class="material-icons left">delete</i> Delete
             </.link>
           </div>
         <% end %>
