@@ -40,8 +40,9 @@ function renderComment(event) {
 
 function commentTemplate(comment) {
   let email = 'Anonymous';
+
   if (comment.user) {
-    email = comment.user.email;
+    email = comment.user.name;
   }
 
   return `
